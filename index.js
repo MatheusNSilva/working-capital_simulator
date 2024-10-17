@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-
+const port = process.env.PORT || 3000; // Usa o $PORT fornecido pelo Heroku
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
