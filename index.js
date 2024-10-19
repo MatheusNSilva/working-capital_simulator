@@ -1,10 +1,19 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000; // Usa o $PORT fornecido pelo Heroku
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import routes from './src/routes/index.js';
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// Rotas
+app.use('/api', routes);
+
+// Iniciar o servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
