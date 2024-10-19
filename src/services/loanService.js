@@ -1,6 +1,13 @@
-import preFixedInterestOB from './preFixedInterestOB.js';
+import { 
+  preFixedInterestOB,
+  preFixedInterestInstallments,
+  postFixedInterestCorrectionOB,
+  postFixedInterestCorrectionInstallments,
+  postFixedInterestOBCorrectionInstallments
+} from './index.js';
+import { formatDate, formatCurrency } from '../helpers/index.js';
 
-const calculate = (
+export const calculate = (
     loanAmount,
     interestRate,
     installments,
@@ -8,42 +15,41 @@ const calculate = (
     calculationOption,
     correctionRate,
 ) => {
-  // Exemplo de lógica de cálculo básico (substitua por sua lógica)
+  
+  const installmentsData = [];
   let calculatedInstallments = [];
-  //  pre-fixado no saldo devedor ou na parcela  
-  console.log("chegou no service")
+
   switch (calculationOption) {
     case 'preFixedInterestOB':
         calculatedInstallments = preFixedInterestOB(loanAmount, interestRate, installments);
         break;
     case 'preFixedInterestInstallments':
-        console.log();
+        calculatedInstallments = preFixedInterestInstallments(loanAmount, interestRate, installments);
         break;
     case 'postFixedInterestCorrectionOB':
-        console.log();
+        calculatedInstallments = postFixedInterestCorrectionOB(loanAmount, interestRate, installments, correctionRate);
         break;
     case 'postFixedInterestCorrectionInstallments':
-        console.log();
+        calculatedInstallments = postFixedInterestCorrectionInstallments(loanAmount, interestRate, installments, correctionRate);
         break;
     case 'postFixedInterestOBCorrectionInstallments':
-        console.log();  
+        calculatedInstallments = postFixedInterestOBCorrectionInstallments(loanAmount, interestRate, installments, correctionRate);
         break;
   }
 
   calculatedInstallments.forEach((calculatedInstallment, installmentIndex) => {
-      const amount = calculatedInstallment;
-      const paymentDate = new Date(concessionDate);
-      paymentDate.setMonth(paymentDate.getMonth() + (installmentIndex + 1));
-  
-      calculatedInstallment = {
-        installment: installmentIndex + 1,
-        paymentDate: paymentDate.toISOString().split("T")[0], // Formato YYYY-MM-DD
-        amount: amount.toFixed(2),
-      };
+    const amount = calculatedInstallment;
+    const paymentDate = new Date(concessionDate);
+    paymentDate.setMonth(paymentDate.getMonth() + (installmentIndex + 1));
 
+    const installmentData = {
+      installment: installmentIndex + 1,
+      paymentDate: formatDate(paymentDate), // Formato YYYY-MM-DD
+      amount: formatCurrency(amount),
+    };
+
+    installmentsData.push(installmentData);
   });
   
-  return calculatedInstallments;
+  return installmentsData;
 };
-
-export default calculate;

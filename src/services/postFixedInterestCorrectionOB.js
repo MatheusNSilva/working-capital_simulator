@@ -1,4 +1,4 @@
-const postFixedInterestCorrectionOB = (loanAmount, interest, numberInstallments, correctionRate) => {
+export const postFixedInterestCorrectionOB = (loanAmount, interest, numberInstallments, correctionRate) => {
     const betweenEventsExponent = 30/30;
     const amortization = loanAmount / numberInstallments;
     const installments = [];
@@ -16,5 +16,3 @@ const postFixedInterestCorrectionOB = (loanAmount, interest, numberInstallments,
 
     return installments;
 };
-
-export default postFixedInterestCorrectionOB;

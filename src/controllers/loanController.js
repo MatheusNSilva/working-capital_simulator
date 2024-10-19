@@ -1,4 +1,4 @@
-import calculate from "../services/loanService.js";
+import { calculate } from "../services/index.js";
 
 const calculateInstallments = (req, res) => {
   const {

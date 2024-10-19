@@ -1,4 +1,4 @@
-const preFixedInterestInstallments = (loanAmount, interest, numberInstallments) => {
+export const preFixedInterestInstallments = (loanAmount, interest, numberInstallments) => {
     const betweenEvents = 30;
     const amortization = loanAmount / numberInstallments;
     const installments = [];
@@ -15,5 +15,3 @@ const preFixedInterestInstallments = (loanAmount, interest, numberInstallments) 
 
     return installments;
 };
-
-export default preFixedInterestInstallments;
