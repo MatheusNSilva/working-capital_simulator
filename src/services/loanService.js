@@ -44,7 +44,7 @@ export const calculate = (
 
     const installmentData = {
       installment: installmentIndex + 1,
-      paymentDate: formatDate(paymentDate), // Formato YYYY-MM-DD
+      paymentDate: formatDate(paymentDate),
       amount: formatCurrency(amount),
     };
 

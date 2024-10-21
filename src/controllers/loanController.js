@@ -19,7 +19,7 @@ const calculateInstallments = (req, res) => {
       calculationOption,
       correctionRate,
     );
-    res.status(200).json({ interestRate: calculatedInstallments });
+    res.status(200).json({ calculatedInstallments });
   } catch (error) {
     res.status(500).json({ message: "Erro ao calcular as parcelas" });
   }
